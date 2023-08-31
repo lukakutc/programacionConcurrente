@@ -16,13 +16,16 @@ public class ejercicio1 {
             // solo unas pares de veces.
 
             for (i = 0; i < 40; i++) {
+
                 Cliente juan = new Cliente();
                 juan.setName("Juan Lopez");
                 Cliente ines = new Cliente();
                 ines.setName("Ines Garcia");
                 juan.start();
                 ines.start();
+                Recurso.uso();
             }
+                
         }
     }
 }
