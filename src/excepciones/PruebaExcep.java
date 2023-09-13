@@ -13,7 +13,7 @@ public class PruebaExcep {
     public static String escribirSiMayor(int edad) throws MenorDeEdadExcepcion {
         String res = " es mayor.";
         if (edad < 18) {
-            throw new MenorDeEdadExcepcion("MENOR DE EDAD. ALERTA");
+            throw new MenorDeEdadExcepcion();
         }
         return res;
     }
@@ -53,7 +53,12 @@ public class PruebaExcep {
     }
 
     public static void main(String[] args) {
-        ruleta();
+        try {
+            escribirSiMayor(14);
+        } catch (MenorDeEdadExcepcion e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }
