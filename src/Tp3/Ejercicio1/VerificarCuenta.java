@@ -5,7 +5,7 @@ public class VerificarCuenta implements Runnable {
     private CuentaBanco cb = new CuentaBanco();
 
     //Metodo para retirar dinero de la cuenta
-    private void HacerRetiro(int cantidad) throws InterruptedException {
+    private synchronized void HacerRetiro(int cantidad) throws InterruptedException {
         //Si el balance de la cuenta es mayor o igual que la cantidad a retirar de la cuenta se realiza el retiro
         if (cb.getBalance() >= cantidad) {
             //mensaje para informar que hilo esta haciendo un retiro de la cuenta cb propiamente creada por el hilo (raro)
