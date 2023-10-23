@@ -15,34 +15,63 @@ public class Comida {
         semPedido = new Semaphore(0);
         semComidaLista = new Semaphore(0);
     }
-
-    public void pedirComida(){
-        //a este metodo lo llama mozo
-        semPedido.release(1); //0 pedidos a 1 pedido
-    }
-    public void cocinarPedido(){
-        //A este metodo lo llama cocinero.
-        semComidaLista.release(1); //0 comidas listas a 1
-    }
-
+    //cocinero
+    //ESPERAR pedido
+    //cocinar pedido
+    //entregar pedido a mozo
+    
     public void esperarPedido(){
-        //A este metodo lo llama cocinero (Esperando por recibir el pedido para cocinar)
+        
         try {
-            semPedido.acquire(1); //De 1 pedido pendiente a 0 pedidos pendientes
+            semPedido.acquire();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+        System.out.println("El cocinero recibe el pedido del mozo");
+    }
+
+    public void cocinarPedido(){
+        System.out.println("El cocinero esta cocinando el pedido");
+        try {
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
+    public void pedidoCocinado(){
+        System.out.println("El cocinero termino de cocinar el pedido");
+        semComidaLista.release();
+    }
 
-    public void entregarComida(){
-        //La comida ya la cocino el cocinero y el mozo la entrega
+    //Mozo
+    //Generar pedido
+    //pedir al cocinero
+    //ESPERAR comida hecha de mozo
+
+    public void generarPedido(){
+        System.out.println("El cliente le esta pidiendo al mozo");
         try {
-            semComidaLista.acquire(1); //De 1 comida lista a 0 comidas litas
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    public void pedirComida(){
+        System.out.println("El mozo le pide al cocinero");
+        semPedido.release();
+    }
+    public void entregarACliente(){
+        
+        try {
+            semComidaLista.acquire();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println("El mozo le entrega la comida lista al cliente");
     }
 
 }    

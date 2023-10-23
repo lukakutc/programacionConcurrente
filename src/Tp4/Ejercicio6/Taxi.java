@@ -3,33 +3,46 @@ package Tp4.Ejercicio6;
 import java.util.concurrent.Semaphore;
 
 public class Taxi {
-    //Esto es un problema de tipo rendez vous pues el taxista depende del pasajero y el pasajero del taxista
-    //para lograr el funcionamiento
+    // Esto es un problema de tipo rendez vous pues el taxista depende del pasajero
+    // y el pasajero del taxista
+    // para lograr el funcionamiento
 
-    //Los semaforos van en el recurso compartido
-    //Un semaforo indica
-    private Semaphore semTaxiLibre = new Semaphore(1);
-    private Semaphore semTaxiDestino = new Semaphore(0);
-    
-    public void subirPasajero(){
-        semTaxiLibre.release();
-        System.out.println("Se subio un pasajero al taxi");
-        System.out.println("....Viajando....");
+    // Los semaforos van en el recurso compartido
+    // semLlegadaDestino es para que el taxista le comunique al pasajero cuando
+    // llego
+    // semTaxista es para que el pasajero despierte al taxi cuando se sube
+    private Semaphore semLlegadaDestino = new Semaphore(0);
+    private Semaphore semTaxista = new Semaphore(0);
+
+    public void esperarPasajero() {
         try {
-            Thread.sleep(4000);
-            System.out.println("El pasajero llego a destino. Taxista esperando");
-            semTaxiDestino.acquire();
-            esperarPasajero();
+            semTaxista.acquire();
         } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        System.out.println("Se desperto el taxista");
+    }
+
+    public void llegarDestino(){
+        System.out.println("Se llego a destino");
+        semLlegadaDestino.release();
         
     }
-    public void esperarPasajero(){
+
+    public void subirPasajero(){
+        System.out.println("Se subio un pasajero");
+        semTaxista.release();
+    }
+    public void bajarPasajero(){
         try {
-            semTaxiLibre.acquire();
+            semLlegadaDestino.acquire();
         } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        System.out.println("Se bajo el pasajero");
     }
+    
+
 }

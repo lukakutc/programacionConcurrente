@@ -17,4 +17,4 @@ public class Ejecucion {
         hiloMozo.start();
         hiloCocinero.start();
     }
-}//Estan mal el orden de los mensajes pero el programa creo q funciona bien
+}
