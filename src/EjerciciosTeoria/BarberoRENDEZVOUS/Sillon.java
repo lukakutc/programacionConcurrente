@@ -1,4 +1,4 @@
-package EjerciciosTeoria.Barbero;
+package EjerciciosTeoria.BarberoRENDEZVOUS;
 
 import java.util.concurrent.Semaphore;
 

@@ -1,0 +1,7 @@
+aca necesitamos ya un poco de analisis.
+un animal entra al comedero -> come -> sale del comedero
+Que operaciones tienen que ser atomicas??
+    1. La verificacion del tipo del animal (porque el tipo puede cambiar si otro hilo esta ejecutando esa parte)
+    2. la parte de cambiar el turno ya que el metodo es ejecutado cuandno los animales terminan de comer y todos los animales terminan de comer
+
+Como puedo hacer para indicar que especie de animales esta cmoiendo

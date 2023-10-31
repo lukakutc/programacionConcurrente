@@ -1,13 +1,13 @@
-package EjerciciosTeoria.Barbero;
+package EjerciciosTeoria.BarberoRENDEZVOUS;
 
 public class Barbero implements Runnable {
     private Sillon sillon;
-    
+
     public Barbero(Sillon sillon) {
         this.sillon = sillon;
     }
 
-    public void cortarPelo(){
+    public void cortarPelo() {
         System.out.println("El barbero le esta cortando el pelo al cliente");
         try {
             Thread.sleep(4000);
@@ -16,9 +16,12 @@ public class Barbero implements Runnable {
             e.printStackTrace();
         }
     }
-    public void run(){
-        sillon.esperarCliente();
-        cortarPelo();
-        sillon.terminarCorte();
+
+    public void run() {
+        while (true) {
+            sillon.esperarCliente();
+            cortarPelo();
+            sillon.terminarCorte();
+        }
     }
 }

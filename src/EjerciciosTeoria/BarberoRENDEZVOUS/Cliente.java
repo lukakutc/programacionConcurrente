@@ -1,4 +1,4 @@
-package EjerciciosTeoria.Barbero;
+package EjerciciosTeoria.BarberoRENDEZVOUS;
 
 public class Cliente implements Runnable {
     private Sillon sillon;
@@ -8,8 +8,10 @@ public class Cliente implements Runnable {
     }
 
     public void run(){
+        while(true){
         sillon.pedirCorte();
         sillon.dejarBarberia();
+        }
     }
 
 }

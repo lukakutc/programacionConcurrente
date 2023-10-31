@@ -1,4 +1,4 @@
-package EjerciciosTeoria.Barbero;
+package EjerciciosTeoria.BarberoRENDEZVOUS;
 
 public class Ejecucion {
     public static void main(String[] args) {
@@ -9,9 +9,11 @@ public class Ejecucion {
         Cliente cliente = new Cliente(sillon);
         //Creamos los hilos de los runnables
         Thread hiloBarbero = new Thread(barbero);
-        Thread hiloCliente = new Thread(cliente);
+        Thread hiloCliente1 = new Thread(cliente,"cliente1");
+
 
         hiloBarbero.start();
-        hiloCliente.start();
+        hiloCliente1.start();
+
     }
 }
