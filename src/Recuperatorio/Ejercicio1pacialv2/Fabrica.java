@@ -13,7 +13,7 @@ public class Fabrica {
         cantBotellasVino = 10;
         cantCajasAlmacen = 0;
         semTransportista = new Semaphore(0);
-        semEmpaquetador = new Semaphore(0,true);
+        semEmpaquetador = new Semaphore(0);
         mutexVino = new Semaphore(1);
         mutexAgua = new Semaphore(1);
         llamoEmpaquetador = "";
