@@ -4,9 +4,9 @@ public class Embotellador implements Runnable{
     String tipo;
     Fabrica fabrica;
 
-    public Embotellador(Fabrica fabrica, String tipo) {
+    public Embotellador(Recuperatorio.Ejercicio1parcialv3.Fabrica fabrica2, String tipo) {
         this.tipo = tipo;
-        this.fabrica = fabrica;
+        this.fabrica = fabrica2;
     }
 
     public void run() {
