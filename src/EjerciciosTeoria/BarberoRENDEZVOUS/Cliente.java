@@ -10,8 +10,8 @@ public class Cliente implements Runnable {
     public void run(){
         while(true){
         sillon.pedirCorte();
-        sillon.dejarBarberia();
+        sillon.esperarCorteTerminado();;
         }
     }
-
+//hicimos aca el rendez vous jajajajajaaj
 }

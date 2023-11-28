@@ -1,0 +1,7 @@
+okay. 
+El tren espera a que suban todos los pasajeros, inicia viaje, viaja, termina viaje, espera a que se bajen todos los pasajeros (no pueden repetir
+viaje), se suben todos los nuevos pasajeros y vuelve a arrancar viaje
+
+O sea
+Clase tren: esperar pasajeros, iniciar viaje, terminar viaje 
+Hilo vendedor tickets: Hilos pasajeros le compran los pasajes
