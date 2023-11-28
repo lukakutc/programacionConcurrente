@@ -24,6 +24,7 @@ public class Fabrica {
     }
 
     public void ponerBotella(String tipo) {
+        
         if (tipo.equals("A")) {
             try {
                 mutexAgua.acquire();
@@ -31,13 +32,13 @@ public class Fabrica {
                 System.out.println(
                         "Un embotellador puso botella de agua en la caja. Quedan por poner: " + botellasRestantesAgua);
                 if (botellasRestantesAgua == 0) {
-                    //mutexCambioCaja.acquire();
+
 
                     llamaEmpleado = tipo;
                     semEmpaquetador.release();
                     esperarCajaAgua.acquire();
 
-                    //mutexCambioCaja.release();
+    
                 }
 
                 mutexAgua.release();
@@ -50,18 +51,20 @@ public class Fabrica {
                 System.out.println(
                         "Un embotellador puso botella de vino en la caja. Quedan por poner: " + botellasRestantesVino);
                 if (botellasRestantesVino == 0) {
-                    //mutexCambioCaja.acquire();
+
 
                     llamaEmpleado = tipo;
                     semEmpaquetador.release();
                     esperarCajaVino.acquire();
 
-                    //mutexCambioCaja.release();
+                    
                 }
+                mutexVino.release();
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+            
         }
     }
 
@@ -111,4 +114,6 @@ public class Fabrica {
             e.printStackTrace();
         }
     }
+
+    
 }
