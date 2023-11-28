@@ -13,12 +13,12 @@ public class Fabrica {
         cantBotellasVino = 10;
         cantCajasAlmacen = 0;
         semTransportista = new Semaphore(0);
-        semEmpaquetador = new Semaphore(0);
+        semEmpaquetador = new Semaphore(0,true);
         mutexVino = new Semaphore(1);
         mutexAgua = new Semaphore(1);
         llamoEmpaquetador = "";
-        embotelladorAguaEsperar = new Semaphore(1);
-        embotelladorVinoEsperar = new Semaphore(1);
+        embotelladorAguaEsperar = new Semaphore(0);
+        embotelladorVinoEsperar = new Semaphore(0);
     }
 
     public void ponerBotella(String tipo) {
@@ -29,9 +29,9 @@ public class Fabrica {
                 cantBotellasAgua--;
                 System.out.println("Quedan "+cantBotellasAgua+" por poner en la caja");
                 if (cantBotellasAgua == 0) {
-                    embotelladorAguaEsperar.acquire();
                     llamoEmpaquetador = tipo;
                     semEmpaquetador.release();
+                    embotelladorAguaEsperar.acquire();
                 }
                 mutexAgua.release();
             } catch (InterruptedException e) {
@@ -44,10 +44,9 @@ public class Fabrica {
                 cantBotellasVino--;
                 System.out.println("Quedan "+cantBotellasVino+" por poner en la caja");
                 if (cantBotellasVino == 0) {
-                    embotelladorVinoEsperar.acquire();
                     llamoEmpaquetador = tipo;
                     semEmpaquetador.release();
-                    
+                    embotelladorVinoEsperar.acquire();
                 }
                 mutexVino.release();
             } catch (InterruptedException e) {
@@ -78,10 +77,10 @@ public class Fabrica {
     public void reponerCaja() {
         System.out.println("Empaquetador repone la caja");
         if (llamoEmpaquetador.equals("A")) {
-            cantBotellasAgua = 0;
+            cantBotellasAgua = 10;
             embotelladorAguaEsperar.release();
         } else {
-            cantBotellasVino = 0;
+            cantBotellasVino = 10;
             embotelladorVinoEsperar.release();
         }
     }
